@@ -31,6 +31,7 @@
 		let weather;
         // the variable that stores the air quality index for the city
 		let aqi;
+		let temp;
 
 		// function that accepts that a number N and returns the name of the day and the date N days from now as a string
 		function formatDate(daysFromNow = 0) {
@@ -98,10 +99,47 @@
 				state: state,
 				lat: lat,
 				lon: lon
+				
 			}
 			//printing the city object to the console
 			console.log(city);
-            // BEGIN CODING HERE
+			function getWeatherData()
+			{
+			selectCity(city)	
+			{
+				let apiCall = `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}`;
+				fetch(apiCall)
+				.then((response) => 
+						response.json()
+					)
+					.then((data) => {
+						console.log(data);
+
+						
+
+					});
+				getTemp();
+			}
 		}
+			function getTemp() {
+				apiCall = `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}`;
+    		fetch(apiCall)
+     		.then((response) => response.json() )
+      		.then((data) => {
+       		console.log(data)
+
+        	temp = data.main.temp;
+        	renderTemp()
+        
+      			})
+  
+ 		}
+  			function renderTemp() {
+   			document.querySelector("#temp").innerHTML
+   			= "temperature: " + temp
+ 		}
+		}
+		
 	</script>
 </html>
+		
